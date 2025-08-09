@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type');
-            $table->integer('views');
-            $table->integer('likes');
-          $table->timestamps();
+            $table->enum('type', ['video', 'article']);
+            $table->integer('views')->default(0);
+            $table->integer('likes')->default(0);
+            $table->float('duration')->default(0);
+            $table->float('score')->default(0);
+            $table->timestamp('published_at');
+            $table->json('tags')->nullable();
+            $table->timestamps();
         });
     }
 
